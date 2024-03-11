@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.common.biz.user;
+package com.cxh.shortlink.admin.common.biz.user;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * 用户信息实体
- * 公众号：马丁玩编程，回复：加群，添加马哥微信（备注：link）获取项目资料
  */
 @Data
 @NoArgsConstructor
@@ -36,7 +35,7 @@ public class UserInfoDTO {
     /**
      * 用户 ID
      */
-    @JSONField(name = "id")
+    @JSONField(name = "id")  // 作为id反序列化
     private String userId;
 
     /**

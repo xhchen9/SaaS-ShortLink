@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.config;
+package com.cxh.shortlink.admin.config;
 
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;
@@ -24,7 +24,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 布隆过滤器配置
- * 公众号：马丁玩编程，回复：加群，添加马哥微信（备注：link）获取项目资料
  */
 @Configuration(value = "rBloomFilterConfigurationByAdmin")
 public class RBloomFilterConfiguration {

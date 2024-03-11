@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.admin.common.biz.user;
+package com.cxh.shortlink.admin.common.biz.user;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 
@@ -23,7 +23,6 @@ import java.util.Optional;
 
 /**
  * 用户上下文
- * 公众号：马丁玩编程，回复：加群，添加马哥微信（备注：link）获取项目资料
  */
 public final class UserContext {
 
