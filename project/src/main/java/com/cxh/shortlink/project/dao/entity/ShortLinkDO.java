@@ -19,22 +19,21 @@ package com.cxh.shortlink.project.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.cxh.shortlink.project.common.database.BaseDO;
+import lombok.*;
 
 import java.util.Date;
 
 /**
  * 短链接实体
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
 @TableName("t_link")
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShortLinkDO{
+public class ShortLinkDO extends BaseDO {
 
     /**
      * id
@@ -97,46 +96,4 @@ public class ShortLinkDO{
     @TableField("`describe`")
     private String describe;
 
-    /**
-     * 网站标识
-     */
-    private String favicon;
-
-    /**
-     * 历史PV
-     */
-    private Integer totalPv;
-
-    /**
-     * 历史UV
-     */
-    private Integer totalUv;
-
-    /**
-     * 历史UIP
-     */
-    private Integer totalUip;
-
-    /**
-     * 今日PV
-     */
-    @TableField(exist = false)
-    private Integer todayPv;
-
-    /**
-     * 今日UV
-     */
-    @TableField(exist = false)
-    private Integer todayUv;
-
-    /**
-     * 今日UIP
-     */
-    @TableField(exist = false)
-    private Integer todayUip;
-
-    /**
-     * 删除时间
-     */
-    private Long delTime;
 }
