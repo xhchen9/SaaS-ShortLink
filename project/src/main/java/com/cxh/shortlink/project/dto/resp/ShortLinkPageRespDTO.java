@@ -15,25 +15,18 @@
  * limitations under the License.
  */
 
-package com.cxh.shortlink.project.dao.entity;
+package com.cxh.shortlink.project.dto.resp;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.cxh.shortlink.project.common.database.BaseDO;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import java.util.Date;
 
 /**
- * 短链接实体
+ * 短链接分页返回参数
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@TableName("t_link")
-@NoArgsConstructor
-@AllArgsConstructor
-public class ShortLinkDO extends BaseDO {
+public class ShortLinkPageRespDTO {
 
     /**
      * id
@@ -61,24 +54,9 @@ public class ShortLinkDO extends BaseDO {
     private String originUrl;
 
     /**
-     * 点击量
-     */
-    private Integer clickNum;
-
-    /**
      * 分组标识
      */
     private String gid;
-
-    /**
-     * 启用标识 0：启用 1：未启用
-     */
-    private Integer enableStatus;
-
-    /**
-     * 创建类型 0：接口创建 1：控制台创建
-     */
-    private Integer createdType;
 
     /**
      * 有效期类型 0：永久有效 1：自定义
@@ -88,16 +66,23 @@ public class ShortLinkDO extends BaseDO {
     /**
      * 有效期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date validDate;
 
     /**
-     * 描述, 因为describle是关键字
+     * 创建时间
      */
-    @TableField("`describe`")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
+
+    /**
+     * 描述
+     */
     private String describe;
 
     /**
-     * 图标
+     * 网站标识
      */
     private String favicon;
+
 }

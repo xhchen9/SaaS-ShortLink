@@ -50,4 +50,9 @@ public class ShortLinkCreateReqDTO {
      */
     @TableField("`describe`")
     private String describe;
+
+    /**
+     * 图标
+     */
+    private String favicon;
 }
