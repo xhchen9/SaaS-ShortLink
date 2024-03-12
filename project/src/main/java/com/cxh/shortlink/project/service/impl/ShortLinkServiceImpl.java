@@ -1,6 +1,8 @@
 package com.cxh.shortlink.project.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cxh.shortlink.project.common.convention.exception.ServiceException;
 import com.cxh.shortlink.project.dao.entity.ShortLinkDO;
@@ -35,10 +37,17 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
         shortLinkDO.setFullShortUrl(fullShortUrl);
         shortLinkDO.setShortUri(shortLinkSuffix);
         shortLinkDO.setEnableStatus(0);
+
         try {
             baseMapper.insert(shortLinkDO);
         }catch (DuplicateKeyException ex){
-            log.warn("短链接重复入库");
+            LambdaQueryWrapper<ShortLinkDO> queryWrapper = Wrappers.lambdaQuery(ShortLinkDO.class)
+                    .eq(ShortLinkDO::getFullShortUrl, fullShortUrl);
+            ShortLinkDO shortLinkDO1 = baseMapper.selectOne(queryWrapper);
+            if (shortLinkDO1 != null){
+                log.warn("短链接重复入库");
+                throw new ServiceException("短链接重复");
+            }
         }
         shortUriCachePenetrationBloomFilter.add(shortLinkSuffix);
         return ShortLinkCreateRespDTO.builder()
@@ -56,6 +65,8 @@ public class ShortLinkServiceImpl extends ServiceImpl<ShortLinkMapper, ShortLink
             if (count > 10){
                 throw new ServiceException("短链接重复，请稍后重试!");
             }
+            // 加上当前时间，降低冲突
+            originUrl += System.currentTimeMillis();
             shortUri = HashUtil.hashToBase62(originUrl);
             // 布隆过滤器判断短链接是否存在
             if (!shortUriCachePenetrationBloomFilter.contains(shortUri)){
